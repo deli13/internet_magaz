@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\Alert;
@@ -39,11 +40,11 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label'=>'Каталог', 'url'=>['/view/index']],
+            ['label' => 'Каталог', 'url' => ['/view/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -59,15 +60,16 @@ AppAsset::register($this);
     NavBar::end();
     ?>
     <?php if (!Yii::$app->user->isGuest): ?>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li><?= Html::a("Каталог", ['/catalog/index']) ?></li>
+                <li><?= Html::a("Товары", ['/product/index']) ?></li>
+                <li><?= Html::a("Принудительный импорт товаров", ['/import/index'], ["class" => "text-danger"]) ?></li>
+            </ul>
+        </div>
+    <?php endif; ?>
     <div class="container">
-        <ul class="nav nav-tabs">
-            <li><?= Html::a("Каталог",['/catalog/index'])?></li>
-            <li><?= Html::a("Товары",['/product/index'])?></li>
-            <li><?= Html::a("Принудительный импорт товаров",['/import/index'],["class"=>"text-danger"])?></li>
-        </ul>
-    </div>
-    <?php endif;?>
-    <div class="container">
+<?= $this->render('_basket',[])?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

@@ -89,10 +89,10 @@ class ImportController extends \yii\web\Controller //Импорт товаров
                 }
                 $articul = (int)$row->childNodes[2]->textContent;
                 $roznica = (float)$row->childNodes[4]->textContent + $delta;
-                $opt1 = (float)$row->childNodes[6]->textContent + $delta;
-                $opt2 = (float)$row->childNodes[8]->textContent + $delta;
-                $opt3 = (float)$row->childNodes[10]->textContent + $delta;
-                $opt4 = (float)$row->childNodes[12]->textContent + $delta;
+                $opt4 = $roznica + $roznica*0.05;
+                $opt3 = $opt4 + $roznica*0.05;
+                $opt2 = $opt3+$roznica*0.05;
+                $opt1 = $opt2+$roznica*0.05;
                 $last = $row->childNodes[14]->textContent;
                 $find_prod = Product::find()->where(['name' => $name,
                     'article' => $articul])->one();
