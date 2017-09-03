@@ -15,6 +15,9 @@ class ViewController extends \yii\web\Controller
         $par_id=0;
         if(($parent_slug=Yii::$app->request->get("slug"))!=null){
             $parent=Catalog::findOne(["slug"=>$parent_slug]);
+            if (!is_object($parent)){
+                throw new NotFoundHttpException();
+            }
             $child_catalogs=Catalog::findSubChild($parent->id);
             $par_id=$parent->id;
             $productAll=Product::find()->where(['in','id_catalog',$child_catalogs]);
@@ -46,7 +49,7 @@ class ViewController extends \yii\web\Controller
             $child_nodes=Catalog::findAllChild($data);
             $child=[];
             foreach ($child_nodes as $nodes){
-                $child[]=["id"=>$nodes->id, "name"=>$nodes->name];
+                $child[]=["id"=>$nodes->id, "name"=>$nodes->name,"slug"=>$nodes->slug];
             }
             Yii::$app->response->format=Response::FORMAT_JSON;
             return ['child'=>$child];

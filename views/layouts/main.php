@@ -83,9 +83,6 @@ AppAsset::register($this);
         <p class="pull-right"><?php echo "+7-999-200-20-00"//Yii::powered() ?></p>
     </div>
 </footer>
-<script src="/vendor/bower/jquery-ui/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="/vendor/bower/themes/base/jquery-ui.min.css">
-<script src="/js/main.js"></script>
 <?php $this->endBody() ?>
 </body>
 </html>

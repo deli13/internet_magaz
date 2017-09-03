@@ -119,17 +119,20 @@ class Catalog extends \yii\db\ActiveRecord
     public static function findSubChild($id){ //return array id child
         $catalogs=Catalog::findAllChild($id);
         $array_childs=[$id];
-        if($catalogs){
-            foreach ($catalogs as $catalog){
-                $array_childs[]=$catalog->id;
-                $cat=Catalog::findAllChild($catalog->id);
-                if($cat){
-                    foreach ($cat as $val){
-                        $array_childs[]=$val->id;
+        if($catalogs) {
+            foreach ($catalogs as $catalog) {
+                $array_childs[] = $catalog->id;
+                $cat = Catalog::findAllChild($catalog->id);
+                if ($cat) {
+                    foreach ($cat as $val) {
+                        $array_childs[] = $val->id;
                     }
                 }
             }
         }
+//        } else {
+//            throw new NotFoundHttpException();
+//        }
         return $array_childs;
     }
 }

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\data\Pagination;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
+$this->title="Каталог"
 ?>
 <h1>Каталог</h1>
 <?php Pjax::begin();?>
@@ -14,12 +15,6 @@ use yii\widgets\Pjax;
                 <?php if ($val->parent == 0): ?>
                     <li class="list-group-item">
                         <?= Html::a($val->name, ['/view/index','slug'=>$val->slug],["data-id"=>$val->id, "class"=>"parent"]) ?>
-<!--                    --><?php //if($val->id==$parent):?>
-<!--                        <ul class="hid">-->
-<!---->
-<!--                        </ul>-->
-<!--                        --><?//endif;?>
-
                     </li>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -31,7 +26,7 @@ use yii\widgets\Pjax;
             <div class="col-md-4">
                 <a href="#" class="thumbnail">
                 <?= Html::img($product->image)?>
-                <?= Html::a($product->name,['sale/item','slug'=>$product->slug])?>
+                <?= Html::a($product->name,['/sale/index','slug'=>$product->slug])?>
                 </a>
 
             </div>
