@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded",function(){
+
+    //Отбражение каталога
     $("body").on("mouseover",".parent",function (e) {
         var hrefParent=$(this).parent();
         $(this).toggleClass("parent");
@@ -20,7 +22,27 @@ document.addEventListener("DOMContentLoaded",function(){
             })
         }
     })
+    //Перемотка на верх
     $("body").on("click","a", function(e){
         document.body.scrollTop=0;
+    })
+    //Изменение количества в корзине
+    $('input.update-kol').on('click',function () {
+        var value=$(this).val();
+        var id=$(this).data('id');
+        var newform=document.createElement('form');
+        newform.style.display='none';
+        newform.setAttribute('action','/basket/update');
+        newform.setAttribute('method','get');
+        var input_id=document.createElement('input');
+        var input_val=document.createElement('input');
+        input_id.setAttribute('name','id');
+        input_val.setAttribute('name','val');
+        input_id.value=id;
+        input_val.value=value;
+        newform.appendChild(input_id);
+        newform.appendChild(input_val);
+        document.body.appendChild(newform);
+        newform.submit();
     })
 })

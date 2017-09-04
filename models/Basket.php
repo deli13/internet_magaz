@@ -78,8 +78,4 @@ class Basket extends Model
             return false;
         }
     }
-//Изменение количества
-    public function updateBasket($id, $val){
-
-    }
 }

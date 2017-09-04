@@ -36,7 +36,12 @@ class BasketController extends \yii\web\Controller
         $val=Yii::$app->request->get('val');
         if (is_numeric($id) && is_numeric($val)){
             $basket=new Basket();
-            $update=$basket->updateBasket($id,$val);
+            $basket->id=$id;
+            $basket->count=$val;
+            $basket->appendBasket();
+            if($basket->save()){
+                return $this->redirect(['basket/index']);
+            }
         } else {
             throw new NotFoundHttpException();
         }
