@@ -29,8 +29,5 @@ class SaleController extends \yii\web\Controller
         } else {
             throw new NotFoundHttpException();
         }
-
     }
-
-
 }

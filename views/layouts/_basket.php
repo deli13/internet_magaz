@@ -1,5 +1,5 @@
 <?php
-use Yii;
+//use Yii;
 /**
  * Created by PhpStorm.
  * User: deli13

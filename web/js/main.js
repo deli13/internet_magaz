@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded",function(){
     $("body").on("mouseover",".parent",function (e) {
-        //e.preventDefault();
         var hrefParent=$(this).parent();
+        $(this).toggleClass("parent");
         var data=$(this).data("id");
         var getString="id="+data;
         var ul=hrefParent.find("ul");
         if (hrefParent.find("ul").length){
-        //    ul.toggle();
         } else {
             $.post("/view/parent",getString).done(function (data) {
                 var datas=$.parseJSON=data;
@@ -18,7 +17,8 @@ document.addEventListener("DOMContentLoaded",function(){
                 }
             })
         }
-
-
+    })
+    $("body").on("click","a", function(e){
+        document.body.scrollTop=0;
     })
 })
