@@ -12,9 +12,11 @@ document.addEventListener("DOMContentLoaded",function(){
                 hrefParent.append("<ul class='hid'></ul>");
                 var list=hrefParent.find($("ul"));
                 var child=datas["child"];
+                var li="";
                 for (i in child){
-                    list.append("<li><a href='/price/"+child[i]['slug']+"' class='parent' data-id='"+child[i]['id']+"'>"+child[i]['name']+"</a></li>");
+                    li+="<li><a href='/price/"+child[i]['slug']+"' class='parent' data-id='"+child[i]['id']+"'>"+child[i]['name']+"</a></li>";
                 }
+                list.append($(li));
             })
         }
     })

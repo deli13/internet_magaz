@@ -29,3 +29,6 @@ phpunit.phar
 tests/_output/*
 tests/_support/_generated
 web/vendor/
+web/css/default.css
+web/css/site.css
+Будет удалено web/import/

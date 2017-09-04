@@ -94,9 +94,13 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
   outline: none;
 }
-#append .field-basket-count input[type=number] {
+input[type=number] {
   width: 100px;
 }
-#append .field-basket-count input[type=number]::-webkit-inner-spin-button {
+input[type=number]::-webkit-inner-spin-button {
   opacity: 1;
+}
+.basket table .glyphicon-remove {
+  font-size: 16px;
+  color: #d82b31;
 }

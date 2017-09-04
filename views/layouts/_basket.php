@@ -13,16 +13,27 @@ if (Yii::$app->session->isActive){
 ?>
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="navbar-right">
+
+            <div class="col-md-10">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="form-control"/>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
                 <ul class="nav nav-pills nav-stacked">
                     <li class="">
-                        <a href="#">
+                        <a href="/basket/index">
                             <span style="font-size: 1.5em" class="glyphicon glyphicon-shopping-cart"></span>
+                            <span>Корзина</span>
                             <span style="font-size: 1em;margin-bottom: 10px" class="badge"><?=$count?></span>
                         </a>
                     </li>
                 </ul>
             </div>
-        </div>
+
     </div>
