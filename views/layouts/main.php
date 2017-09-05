@@ -64,6 +64,8 @@ AppAsset::register($this);
             <ul class="nav nav-tabs">
                 <li><?= Html::a("Каталог", ['/catalog/index']) ?></li>
                 <li><?= Html::a("Товары", ['/product/index']) ?></li>
+                <li><?= Html::a("Заказы",['/cart/index'])?></li>
+                <li><?= Html::a("Посты",['/post/index'])?></li>
                 <li><?= Html::a("Принудительный импорт товаров", ['/import/index'], ["class" => "text-danger"]) ?></li>
             </ul>
         </div>

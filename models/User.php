@@ -14,14 +14,15 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         '100' => [
             'id' => '100',
             'username' => 'admin',
-            'password' => 'admin',
+            'password' => 'Demo2908',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
         ],
-        '101' => [
+
+        '102'=>[
             'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
+            'username' => 'administrator',
+            'password' => 'resourceAdmin',
             'authKey' => 'test101key',
             'accessToken' => '101-token',
         ],

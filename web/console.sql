@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS product;
 drop TABLE IF EXISTS catalog;
 DROP TABLE IF EXISTS cart;
+DROP TABLE IF EXISTS post;
 CREATE TABLE catalog (
   id         INT PRIMARY KEY AUTO_INCREMENT,
   name       VARCHAR(2000) NOT NULL,
@@ -31,6 +32,13 @@ CREATE TABLE cart (
   cart VARCHAR(2000),
   name VARCHAR(2000),
   email VARCHAR(2000),
-
-);
-CREATE TABLE post
+  phone VARCHAR(100),
+  created_at TIMESTAMP DEFAULT current_timestamp
+) DEFAULT CHARSET utf8;
+CREATE TABLE post(
+  id int PRIMARY KEY AUTO_INCREMENT,
+  title varchar(2000) NOT NULL ,
+  text text,
+  created_at TIMESTAMP DEFAULT current_timestamp,
+  slug VARCHAR(2000)
+) DEFAULT CHARSET utf8;

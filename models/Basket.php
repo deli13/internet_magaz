@@ -78,4 +78,8 @@ class Basket extends Model
             return false;
         }
     }
+    public function dropBasket(){
+        Yii::$app->session->destroySession("basket");
+        return true;
+    }
 }

@@ -14,7 +14,7 @@ if (Yii::$app->session->isActive){
 
     <div class="row">
 
-            <div class="col-md-10">
+            <!--<div class="col-md-10">
                 <form class="form-inline">
                     <div class="form-group">
                         <input type="text" class="form-control"/>
@@ -23,8 +23,8 @@ if (Yii::$app->session->isActive){
                         <input type="submit" class="form-control"/>
                     </div>
                 </form>
-            </div>
-            <div class="col-md-2">
+            </div>-->
+            <div class="col-md-offset-10">
                 <ul class="nav nav-pills nav-stacked">
                     <li class="">
                         <a href="/basket/index">
