@@ -1,5 +1,6 @@
-DROP TABLE product;
-drop TABLE catalog;
+DROP TABLE IF EXISTS product;
+drop TABLE IF EXISTS catalog;
+DROP TABLE IF EXISTS cart;
 CREATE TABLE catalog (
   id         INT PRIMARY KEY AUTO_INCREMENT,
   name       VARCHAR(2000) NOT NULL,
@@ -24,4 +25,12 @@ CREATE TABLE product (
   slug VARCHAR(2000),
   id_catalog INT NOT NULL,
   FOREIGN KEY (id_catalog) REFERENCES catalog(id)
-)DEFAULT CHARSET utf8
+)DEFAULT CHARSET utf8;
+CREATE TABLE cart (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  cart VARCHAR(2000),
+  name VARCHAR(2000),
+  email VARCHAR(2000),
+
+);
+CREATE TABLE post
