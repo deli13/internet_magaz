@@ -50,6 +50,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
 //                '/'=>'/view/index',
+                '/'=>'/view/index',
                 'price/<slug:>'=>'/view/index',
                 'sale/<slug:>'=>'/sale/index',
                 'page/<slug:>'=>'/page/index',

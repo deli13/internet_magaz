@@ -31,4 +31,6 @@ tests/_support/_generated
 web/vendor/
 web/css/default.css
 web/css/site.css
+checklist.txt
 Будет удалено web/import/
+Будет удалено checklist.txt

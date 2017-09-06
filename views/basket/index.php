@@ -2,6 +2,7 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 $this->title = "Корзина";
@@ -20,8 +21,8 @@ $this->title = "Корзина";
         <?php foreach ($products as $product): ?>
             <tr>
                 <td><?= HTML::encode($product->article) ?></td>
-                <td><?= HTML::tag('img', '', ['src' => $product->image, 'width' => 150]) ?></td>
-                <td><?= HTML::encode($product->name) ?></td>
+                <td><a href="<?=Url::to(['sale/index','slug'=>$product->slug])?>" target="_blank"><?= HTML::tag('img', '', ['src' => $product->image, 'width' => 150]) ?></a></td>
+                <td><a href="<?=Url::to(['sale/index','slug'=>$product->slug])?>" target="_blank"><?= HTML::encode($product->name) ?></a></td>
                 <td><?= HTML::encode($product->price_1 * $cart[$product->id]) ?></td>
                 <td><?= HTML::tag('input', '', ['min' => 1, 'value' => $cart[$product->id], 'type' => 'number', 'class' => 'form-control update-kol', 'data-id' => $product->id, 'onkeypress' => 'return false']) ?></td>
                 <td><?= HTML::a('', ["basket/remove", 'id' => $product->id], ["class" => 'glyphicon glyphicon-remove']) ?></td>

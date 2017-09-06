@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded",function(){
         }
     })
     //Перемотка на верх
-    $("body").on("click","a", function(e){
+    $("body").on("click","a:not(.not_up)", function(e){
         document.body.scrollTop=0;
     })
     //Изменение количества в корзине

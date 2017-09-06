@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use yii;
 use yii\web\UploadedFile;
-use PHPExcel;
 use app\models\Catalog;
 use app\models\Product;
 
@@ -31,15 +30,18 @@ class ImportController extends \yii\web\Controller //Импорт товаров
         $color_level_1 = "#c6c6c6";
         $color_level_2 = "#e6e6e6";
         $color_level_3 = "#5EC3E6";
+        $name_cat="";
         for ($i = 6; $i < $count; $i++) { //Проходимся по файлу начиная с 6 позиции
             $row = $row_table->item($i);
             if ($row->childNodes->length == 2) { //Выцепляем каталоги
                 $str = $row->childNodes[0]->textContent;
+                $str=str_replace("&nbsp;", "", htmlentities($str));
                 $color=$row->childNodes[0]->getAttribute("bgcolor");
-                $find = Catalog::find()->where(['name' => str_replace("&nbsp;", "", htmlentities($str))])->one();
+                $find = Catalog::find()->where(['name' => $str])->andWhere(['in','parent',[$level_2,$level_1,0]])->one();
                 switch ($color){ //Определяем иерархию
                     case $color_level_1:
                         $parent=0;
+                        $name_cat=$str;
                         break;
                     case $color_level_2:
                         $parent=$level_1;
@@ -51,14 +53,17 @@ class ImportController extends \yii\web\Controller //Импорт товаров
                         $parent=0;
                         break;
                 }
+                if ($name_cat=='ХАЛЯВА'){ //Пропуск Халявных продуктов
+                    continue;
+                }
                 if (count($find) == 0) {
                     $cat = new Catalog();
                     $cat->parent = $parent;
-                    $cat->name = str_replace("&nbsp;", "", htmlentities($str));
+                    $cat->name = $str;
                     if (!$cat->save()) {
                         print_r("Error");
                     };
-                    $catalog = Yii::$app->db->lastInsertID;
+                    $catalog = $cat->id;
                     print_r($catalog);
                 } else {
                     $catalog = $find->id;
@@ -78,6 +83,9 @@ class ImportController extends \yii\web\Controller //Импорт товаров
                         break;
                 }
             } elseif ($row->childNodes->length > 5) { //Выцепляем товары
+                if ($name_cat=='ХАЛЯВА'){ //Пропуск Халяных продуктов
+                    continue;
+                }
                 $name = $row->childNodes[0]->textContent;
                 $url = $row->childNodes[0]->firstChild->getAttribute('href');
                 if ((float)$row->childNodes[4]->textContent < 500) { //Манипуляции с ценами
@@ -89,13 +97,13 @@ class ImportController extends \yii\web\Controller //Импорт товаров
                 }
                 $articul = (int)$row->childNodes[2]->textContent;
                 $roznica = (float)$row->childNodes[4]->textContent + $delta;
-                $opt4 = $roznica + $roznica*0.05;
+                $opt4 = $roznica;
                 $opt3 = $opt4 + $roznica*0.05;
                 $opt2 = $opt3+$roznica*0.05;
                 $opt1 = $opt2+$roznica*0.05;
                 $last = $row->childNodes[14]->textContent;
                 $find_prod = Product::find()->where(['name' => $name,
-                    'article' => $articul])->one();
+                    'article' => $articul,'id_catalog'=>$level_3])->one();
                 if (count($find_prod) == 0) { //Если товара не существует
                     $product = new Product();
                     $product->name = $name;

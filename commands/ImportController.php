@@ -49,7 +49,7 @@ class ImportController extends Controller
                     if (!$cat->save()) {
                         print_r("Error");
                     };
-                    $catalog = Yii::$app->db->lastInsertID;
+                    $catalog = $cat->id;
                     print_r($catalog);
                 } else {
                     $catalog = $find->id;

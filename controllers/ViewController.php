@@ -13,6 +13,7 @@ class ViewController extends \yii\web\Controller
     public function actionIndex(){
         $child_catalogs=[];
         $par_id=0;
+        $catalog_name="Каталог";
         if(($parent_slug=Yii::$app->request->get("slug"))!=null){
             $parent=Catalog::findOne(["slug"=>$parent_slug]);
             if (!is_object($parent)){
@@ -20,6 +21,7 @@ class ViewController extends \yii\web\Controller
             }
             $child_catalogs=Catalog::findSubChild($parent->id);
             $par_id=$parent->id;
+            $catalog_name=$parent->name;
             $productAll=Product::find()->where(['in','id_catalog',$child_catalogs]);
         } else {
             $productAll=Product::find();
@@ -34,6 +36,7 @@ class ViewController extends \yii\web\Controller
             "pages"=>$pages,
             "child"=>$child_catalogs,
             "parent"=>$par_id,
+            'catalog_name'=>$catalog_name
             ]);
     }
 
