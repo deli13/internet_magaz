@@ -101,7 +101,15 @@ input[type=number]::-webkit-inner-spin-button {
   opacity: 1;
 }
 .row .product_view {
-  height: 350px;
+  height: 400px;
+}
+.row .product_view .not_up {
+  display: block;
+  min-height: 40px;
+}
+.row .product_view .form-horizontal .form-group {
+  display: inline-block;
+  margin: 0px;
 }
 .basket table .glyphicon-remove {
   font-size: 16px;

@@ -156,15 +156,15 @@ class ImportController extends \yii\web\Controller //Импорт товаров
         $DOM = new \DOMDocument();
         libxml_use_internal_errors(true);
         $DOM->loadHTML($find_img);
-        $img = $DOM->getElementsByTagName('img');
+        $img = $DOM->getElementsByTagName('a');
         foreach ($img as $row) {
-            if ($row->getAttribute("title")) {
+            if ($row->getAttribute("rel")) {
                 try {
-                    $content = file_get_contents($row->getAttribute("src"));
+                    if ($row->getAttribute("rel")=='gallery') $content = file_get_contents($row->getAttribute("href"));
                 } catch (yii\base\ErrorException $e) {
                     return false;
                 }
-                $src = $row->getAttribute("src");
+                $src = $row->getAttribute("href");
                 $names = explode("/", $src);
                 $name = array_pop($names);
                 $name = "/import/" . $name;

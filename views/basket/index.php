@@ -15,6 +15,7 @@ $this->title = "Корзина";
         <th>Название</th>
         <th>Цена</th>
         <th>Количество</th>
+        <th>Итого</th>
         <th>Удалить</th>
         </thead>
         <tbody>
@@ -23,8 +24,9 @@ $this->title = "Корзина";
                 <td><?= HTML::encode($product->article) ?></td>
                 <td><a href="<?=Url::to(['sale/index','slug'=>$product->slug])?>" target="_blank"><?= HTML::tag('img', '', ['src' => $product->image, 'width' => 150]) ?></a></td>
                 <td><a href="<?=Url::to(['sale/index','slug'=>$product->slug])?>" target="_blank"><?= HTML::encode($product->name) ?></a></td>
-                <td><?= HTML::encode($product->price_1 * $cart[$product->id]) ?></td>
+                <td><?= HTML::encode($product->price_1) ?></td>
                 <td><?= HTML::tag('input', '', ['min' => 1, 'value' => $cart[$product->id], 'type' => 'number', 'class' => 'form-control update-kol', 'data-id' => $product->id, 'onkeypress' => 'return false']) ?></td>
+                <td><?= HTML::encode($product->price_1*$cart[$product->id]) ?></td>
                 <td><?= HTML::a('', ["basket/remove", 'id' => $product->id], ["class" => 'glyphicon glyphicon-remove']) ?></td>
             </tr>
         <?php endforeach; ?>

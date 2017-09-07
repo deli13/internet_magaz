@@ -7,10 +7,16 @@ use yii\data\Pagination;
 use yii\web\NotFoundHttpException;
 use yii;
 use yii\web\Response;
+use app\models\Basket;
 
 class ViewController extends \yii\web\Controller
 {
     public function actionIndex(){
+        $form=new Basket();
+        if ($form->load(Yii::$app->request->post()) && $form->validate()){
+            $form->appendBasket();
+            $form->save();
+        }
         $child_catalogs=[];
         $par_id=0;
         $catalog_name="Каталог";
@@ -36,7 +42,8 @@ class ViewController extends \yii\web\Controller
             "pages"=>$pages,
             "child"=>$child_catalogs,
             "parent"=>$par_id,
-            'catalog_name'=>$catalog_name
+            'catalog_name'=>$catalog_name,
+            'model'=>$form
             ]);
     }
 

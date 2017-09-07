@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-md-4">
             <a href="<?= $model->image ?>" data-fancybox='images'>
-                <img src="<?= $model->image ?>" alt="<?= $model->name ?>" class="img-rounded"/>
+                <img src="<?= $model->image ?>" alt="<?= $model->name ?>" class="img-rounded" width="250"/>
             </a>
         </div>
         <div class="col-md-8">
