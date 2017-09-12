@@ -21,8 +21,9 @@ class SaleController extends \yii\web\Controller
             $product=Product::find()
                 ->innerJoinWith('catalog')
                 ->andWhere(['product.slug'=>$product_slug])->one();
+            $breadcr=Catalog::findAllParent($product->id_catalog);
             if($product!=null){
-                return $this->render('index',['model'=>$product,'form_basket'=>$form]);
+                return $this->render('index',['breadcr'=>$breadcr,'model'=>$product,'form_basket'=>$form]);
             } else {
                 throw new NotFoundHttpException();
             }

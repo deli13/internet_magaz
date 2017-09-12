@@ -5,10 +5,12 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => $model->catalog->name, 'url' => ['price/' . $model->catalog->slug]];
+foreach ($breadcr as $key=>$value){
+    $this->params['breadcrumbs'][] = ['label' => $key, 'url' => ['price/' . $value]];
+}
 $this->params['breadcrumbs'][] = $this->title;
 
-$max = preg_replace("/[^0-9]/", '', $product->remain);
+$max = preg_replace("/[^0-9]/", '', $model->remain);
 if ($max == "") {
     $max = 100;
 }

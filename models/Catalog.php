@@ -135,4 +135,16 @@ class Catalog extends \yii\db\ActiveRecord
 //        }
         return $array_childs;
     }
+
+    public static function findAllParent($id){
+        $catalog=Catalog::findOne($id);
+        $parent=$catalog->parent;
+        $arr_parent=[$catalog->name=>$catalog->slug];
+        while ($parent!=0){
+            $find_catalog=Catalog::findOne(['id'=>$parent]);
+            $arr_parent[$find_catalog->name]=$find_catalog->slug;
+            $parent=$find_catalog->parent;
+        }
+        return array_reverse($arr_parent);
+    }
 }
