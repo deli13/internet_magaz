@@ -45,4 +45,10 @@ document.addEventListener("DOMContentLoaded",function(){
         document.body.appendChild(newform);
         newform.submit();
     })
+    
+    $("body").on("change","select[name='limit']",function () {
+        var a=$("<form>").appendTo($("body"));
+        a.append($(this))
+        a.submit();
+    })
 })

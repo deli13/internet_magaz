@@ -29,10 +29,18 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'transport'=>[
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp-19.1gb.ru',
+                'username' => 'u479196',
+                'password' => '39a1c85c4xv',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            //'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -70,7 +78,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1','77.247.173.195'],
     ];
 
     $config['bootstrap'][] = 'gii';

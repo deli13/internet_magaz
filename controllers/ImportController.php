@@ -130,6 +130,8 @@ class ImportController extends \yii\web\Controller //Импорт товаров
                 }
             }
         }
+        Yii::$app->db->createCommand("DELETE FROM product WHERE DATE(updated_at)<:date",[':date'=>date('Y-m-d')])->execute();
+        //Yii::$app->db->createCommand("DELETE FROM catalog WHERE DATE(updated_at)<:date",[':date'=>date('Y-m-d')])->execute();
         return $this->render('index', ["array" => $row_table, "count" => $find_prod, 'text' => "Импорт окончен"]);
     }
 

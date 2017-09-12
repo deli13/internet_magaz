@@ -8,7 +8,7 @@ use yii\web\Response;
 use app\models\Product;
 use app\models\Basket;
 use app\models\Cart;
-
+use PHPMailer;
 class BasketController extends \yii\web\Controller
 {
     public function beforeAction($action)
@@ -71,24 +71,59 @@ class BasketController extends \yii\web\Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()){
             $model->save();
             $text_message="Заказ №".$model->id."<br>";
-            $text_message="Имя {$model->name}<br>";
-            $text_message="email {$model->email}<br>";
-            $text_message="Телефон {$model->phone}<br>";
+            $text_message.="Имя {$model->name}<br>";
+            $text_message.="email {$model->email}<br>";
+            $text_message.="Телефон {$model->phone}<br>";
             $text_message.="<table>";
             foreach ($products as $product){
                 $text_message.="<tr>";
                 $text_message.="<td>{$product->name}</td>";
-                $text_message.="<td>".$cart[$product->id]*$product->price_1."</td>";
-                $text_message.="<td>{$cart[$product->id]}</td>";
+                $text_message.="<td> артикул{$product->article}</td>";
+                $text_message.="<td> кол-во{$cart[$product->id]}</td>";
+                $itog=0;
+                if ($summ<=8000){
+                    $text_message.="<td> цена".$cart[$product->id]*$product->price_1."</td>";
+                    $itog+=$cart[$product->id]*$product->price_1;
+                } else if($summ>8000 and $summ<=15000){
+                    $text_message.="<td> цена".$cart[$product->id]*$product->price_2."</td>";
+                    $itog+=$cart[$product->id]*$product->price_2;
+                } else if($summ>15000 and $summ<=30000){
+                    $text_message.="<td> цена".$cart[$product->id]*$product->price_3."</td>";
+                    $itog+=$cart[$product->id]*$product->price_3;
+                } else{
+                    $text_message.="<td> цена".$cart[$product->id]*$product->price_4."</td>";
+                    $itog+=$cart[$product->id]*$product->price_4;
+                }
+
                 $text_message.="</tr>";
             }
             $text_message.="</table>";
-            $text_message.="<br>Итог {$summ}";
-            Yii::$app->mailer->compose()
-                ->setFrom("proaksmarket@gmail.com")
-                ->setSubject("Заказ")
-                ->setHtmlBody($text_message)
-                ->send();
+            $text_message.="<br>Итог {$itog}";
+            $mailer=new PHPMailer();
+            $mailer->isSMTP();
+            $mailer->Host="smtp-19.1gb.ru";
+            $mailer->Port=465;
+            $mailer->SMTPDebug=2;
+            $mailer->SMTPAuth=true;
+            $mailer->Username="u479196";
+            $mailer->Password="39a1c85c4xv";
+            $mailer->CharSet="UTF-8";
+            $mailer->setFrom("info@proaksmarket.ru");
+            $mailer->addAddress("proaksmarket@gmail.com");
+            $mailer->addAddress($model->email);
+            $mailer->isHTML(true);
+            $mailer->Subject="Письмо с сайта proaksmarket";
+            $mailer->Body=$text_message;
+            if(!$mailer->send()){
+                Yii::$app->session->set("qwe",$mailer->ErrorInfo);
+            }
+//            Yii::$app->mailer->compose()
+//                ->setFrom("info@proaksmarket.ru")
+//                ->setTo("proaksmarket@gmail.com")
+//                ->setCc($model->email)
+//                ->setSubject("Заказ")
+//                ->setHtmlBody($text_message)
+//                ->send();
 
             $basket->dropBasket();
             return $this->redirect(['site/apply'])->send();

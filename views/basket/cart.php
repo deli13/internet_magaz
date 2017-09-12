@@ -10,7 +10,10 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 ?>
-<div class="row">
+
+<p class="alert alert-success">Цена в корзине считается по колонке "цена 1". После оформления заказа цены будут автоматически пересчитаны в соответствии с суммой заказа. Итоговый список автоматически будет отправлен вам на почту</p>
+
+    <div class="row">
     <div class="col-md-8">
         <p class="lead"></p>
     </div>
