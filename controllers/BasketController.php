@@ -74,7 +74,7 @@ class BasketController extends \yii\web\Controller
             $text_message.="Имя {$model->name}<br>";
             $text_message.="email {$model->email}<br>";
             $text_message.="Телефон {$model->phone}<br>";
-            $text_message.="<table>";
+            $text_message.="<table border='1'>";
             foreach ($products as $product){
                 $text_message.="<tr>";
                 $text_message.="<td>{$product->name}</td>";

@@ -32,5 +32,7 @@ web/vendor/
 web/css/default.css
 web/css/site.css
 checklist.txt
+controllers/phpprotect_obfuscated
+controllers/phpprotect_obfuscated/*
 Будет удалено web/import/
 Будет удалено checklist.txt
